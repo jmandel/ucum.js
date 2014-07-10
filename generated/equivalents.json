@@ -1,26 +1,1183 @@
 {
-  "Y": 1e+24,
-  "Z": 1e+21,
-  "E": 1000000000000000000,
-  "P": 1000000000000000,
-  "T": 1000000000000,
-  "G": 1000000000,
-  "M": 1000000,
-  "k": 1000,
-  "h": 100,
-  "da": 10,
-  "d": 0.1,
-  "c": 0.01,
-  "m": 0.001,
-  "u": 0.000001,
-  "n": 1e-9,
-  "p": 1e-12,
-  "f": 1e-15,
-  "a": 1e-18,
-  "z": 1e-21,
-  "y": 1.0000000000000001e-24,
-  "Ki": 1024,
-  "Mi": 1048576,
-  "Gi": 1073741824,
-  "Ti": 1099511627776
+  "10*": {
+    "value": 10,
+    "ucum": "1"
+  },
+  "10^": {
+    "value": 10,
+    "ucum": "1"
+  },
+  "[pi]": {
+    "value": 3.141592653589793,
+    "ucum": "1"
+  },
+  "%": {
+    "value": 1,
+    "ucum": "10*-2"
+  },
+  "[ppth]": {
+    "value": 1,
+    "ucum": "10*-3"
+  },
+  "[ppm]": {
+    "value": 1,
+    "ucum": "10*-6"
+  },
+  "[ppb]": {
+    "value": 1,
+    "ucum": "10*-9"
+  },
+  "[pptr]": {
+    "value": 1,
+    "ucum": "10*-12"
+  },
+  "mol": {
+    "value": 6.0221367,
+    "ucum": "10*23"
+  },
+  "sr": {
+    "value": 1,
+    "ucum": "rad2"
+  },
+  "Hz": {
+    "value": 1,
+    "ucum": "s-1"
+  },
+  "N": {
+    "value": 1,
+    "ucum": "kg.m/s2"
+  },
+  "Pa": {
+    "value": 1,
+    "ucum": "N/m2"
+  },
+  "J": {
+    "value": 1,
+    "ucum": "N.m"
+  },
+  "W": {
+    "value": 1,
+    "ucum": "J/s"
+  },
+  "A": {
+    "value": 1,
+    "ucum": "C/s"
+  },
+  "V": {
+    "value": 1,
+    "ucum": "J/C"
+  },
+  "F": {
+    "value": 1,
+    "ucum": "C/V"
+  },
+  "Ohm": {
+    "value": 1,
+    "ucum": "V/A"
+  },
+  "S": {
+    "value": 1,
+    "ucum": "Ohm-1"
+  },
+  "Wb": {
+    "value": 1,
+    "ucum": "V.s"
+  },
+  "Cel": {
+    "ucum": "cel(1 K)"
+  },
+  "T": {
+    "value": 1,
+    "ucum": "Wb/m2"
+  },
+  "H": {
+    "value": 1,
+    "ucum": "Wb/A"
+  },
+  "lm": {
+    "value": 1,
+    "ucum": "cd.sr"
+  },
+  "lx": {
+    "value": 1,
+    "ucum": "lm/m2"
+  },
+  "Bq": {
+    "value": 1,
+    "ucum": "s-1"
+  },
+  "Gy": {
+    "value": 1,
+    "ucum": "J/kg"
+  },
+  "Sv": {
+    "value": 1,
+    "ucum": "J/kg"
+  },
+  "gon": {
+    "value": 0.9,
+    "ucum": "deg"
+  },
+  "deg": {
+    "value": 2,
+    "ucum": "[pi].rad/360"
+  },
+  "'": {
+    "value": 1,
+    "ucum": "deg/60"
+  },
+  "''": {
+    "value": 1,
+    "ucum": "'/60"
+  },
+  "l": {
+    "value": 1,
+    "ucum": "dm3"
+  },
+  "L": {
+    "value": 1,
+    "ucum": "l"
+  },
+  "ar": {
+    "value": 100,
+    "ucum": "m2"
+  },
+  "min": {
+    "value": 60,
+    "ucum": "s"
+  },
+  "h": {
+    "value": 60,
+    "ucum": "min"
+  },
+  "d": {
+    "value": 24,
+    "ucum": "h"
+  },
+  "a_t": {
+    "value": 365.24219,
+    "ucum": "d"
+  },
+  "a_j": {
+    "value": 365.25,
+    "ucum": "d"
+  },
+  "a_g": {
+    "value": 365.2425,
+    "ucum": "d"
+  },
+  "a": {
+    "value": 1,
+    "ucum": "a_j"
+  },
+  "wk": {
+    "value": 7,
+    "ucum": "d"
+  },
+  "mo_s": {
+    "value": 29.53059,
+    "ucum": "d"
+  },
+  "mo_j": {
+    "value": 1,
+    "ucum": "a_j/12"
+  },
+  "mo_g": {
+    "value": 1,
+    "ucum": "a_g/12"
+  },
+  "mo": {
+    "value": 1,
+    "ucum": "mo_j"
+  },
+  "t": {
+    "value": 1000,
+    "ucum": "kg"
+  },
+  "bar": {
+    "value": 100000,
+    "ucum": "Pa"
+  },
+  "u": {
+    "value": 1.6605402000000002e-24,
+    "ucum": "g"
+  },
+  "eV": {
+    "value": 1,
+    "ucum": "[e].V"
+  },
+  "AU": {
+    "value": 149597.870691,
+    "ucum": "Mm"
+  },
+  "pc": {
+    "value": 30856780000000000,
+    "ucum": "m"
+  },
+  "[c]": {
+    "value": 299792458,
+    "ucum": "m/s"
+  },
+  "[h]": {
+    "value": 6.6260755e-24,
+    "ucum": "J.s"
+  },
+  "[k]": {
+    "value": 1.380658e-23,
+    "ucum": "J/K"
+  },
+  "[eps_0]": {
+    "value": 8.854187816999999e-12,
+    "ucum": "F/m"
+  },
+  "[mu_0]": {
+    "value": 1,
+    "ucum": "4.[pi].10*-7.N/A2"
+  },
+  "[e]": {
+    "value": 1.60217733e-19,
+    "ucum": "C"
+  },
+  "[m_e]": {
+    "value": 9.1093897e-28,
+    "ucum": "g"
+  },
+  "[m_p]": {
+    "value": 1.6726231000000002e-24,
+    "ucum": "g"
+  },
+  "[G]": {
+    "value": 6.67259e-11,
+    "ucum": "m3.kg-1.s-2"
+  },
+  "[g]": {
+    "value": 9.806650000000001,
+    "ucum": "m/s2"
+  },
+  "atm": {
+    "value": 101325,
+    "ucum": "Pa"
+  },
+  "[ly]": {
+    "value": 1,
+    "ucum": "[c].a_j"
+  },
+  "gf": {
+    "value": 1,
+    "ucum": "g.[g]"
+  },
+  "[lbf_av]": {
+    "value": 1,
+    "ucum": "[lb_av].[g]"
+  },
+  "Ky": {
+    "value": 1,
+    "ucum": "cm-1"
+  },
+  "Gal": {
+    "value": 1,
+    "ucum": "cm/s2"
+  },
+  "dyn": {
+    "value": 1,
+    "ucum": "g.cm/s2"
+  },
+  "erg": {
+    "value": 1,
+    "ucum": "dyn.cm"
+  },
+  "P": {
+    "value": 1,
+    "ucum": "dyn.s/cm2"
+  },
+  "Bi": {
+    "value": 10,
+    "ucum": "A"
+  },
+  "St": {
+    "value": 1,
+    "ucum": "cm2/s"
+  },
+  "Mx": {
+    "value": 1e-8,
+    "ucum": "Wb"
+  },
+  "G": {
+    "value": 0.0001,
+    "ucum": "T"
+  },
+  "Oe": {
+    "value": 250,
+    "ucum": "/[pi].A/m"
+  },
+  "Gb": {
+    "value": 1,
+    "ucum": "Oe.cm"
+  },
+  "sb": {
+    "value": 1,
+    "ucum": "cd/cm2"
+  },
+  "Lmb": {
+    "value": 1,
+    "ucum": "cd/cm2/[pi]"
+  },
+  "ph": {
+    "value": 0.0001,
+    "ucum": "lx"
+  },
+  "Ci": {
+    "value": 37000000000,
+    "ucum": "Bq"
+  },
+  "R": {
+    "value": 0.00025800000000000004,
+    "ucum": "C/kg"
+  },
+  "RAD": {
+    "value": 100,
+    "ucum": "erg/g"
+  },
+  "REM": {
+    "value": 1,
+    "ucum": "RAD"
+  },
+  "[in_i]": {
+    "value": 2.54,
+    "ucum": "cm"
+  },
+  "[ft_i]": {
+    "value": 12,
+    "ucum": "[in_i]"
+  },
+  "[yd_i]": {
+    "value": 3,
+    "ucum": "[ft_i]"
+  },
+  "[mi_i]": {
+    "value": 5280,
+    "ucum": "[ft_i]"
+  },
+  "[fth_i]": {
+    "value": 6,
+    "ucum": "[ft_i]"
+  },
+  "[nmi_i]": {
+    "value": 1852,
+    "ucum": "m"
+  },
+  "[kn_i]": {
+    "value": 1,
+    "ucum": "[nmi_i]/h"
+  },
+  "[sin_i]": {
+    "value": 1,
+    "ucum": "[in_i]2"
+  },
+  "[sft_i]": {
+    "value": 1,
+    "ucum": "[ft_i]2"
+  },
+  "[syd_i]": {
+    "value": 1,
+    "ucum": "[yd_i]2"
+  },
+  "[cin_i]": {
+    "value": 1,
+    "ucum": "[in_i]3"
+  },
+  "[cft_i]": {
+    "value": 1,
+    "ucum": "[ft_i]3"
+  },
+  "[cyd_i]": {
+    "value": 1,
+    "ucum": "[yd_i]3"
+  },
+  "[bf_i]": {
+    "value": 144,
+    "ucum": "[in_i]3"
+  },
+  "[cr_i]": {
+    "value": 128,
+    "ucum": "[ft_i]3"
+  },
+  "[mil_i]": {
+    "value": 0.001,
+    "ucum": "[in_i]"
+  },
+  "[cml_i]": {
+    "value": 1,
+    "ucum": "[pi]/4.[mil_i]2"
+  },
+  "[hd_i]": {
+    "value": 4,
+    "ucum": "[in_i]"
+  },
+  "[ft_us]": {
+    "value": 1200,
+    "ucum": "m/3937"
+  },
+  "[yd_us]": {
+    "value": 3,
+    "ucum": "[ft_us]"
+  },
+  "[in_us]": {
+    "value": 1,
+    "ucum": "[ft_us]/12"
+  },
+  "[rd_us]": {
+    "value": 16.5,
+    "ucum": "[ft_us]"
+  },
+  "[ch_us]": {
+    "value": 4,
+    "ucum": "[rd_us]"
+  },
+  "[lk_us]": {
+    "value": 1,
+    "ucum": "[ch_us]/100"
+  },
+  "[rch_us]": {
+    "value": 100,
+    "ucum": "[ft_us]"
+  },
+  "[rlk_us]": {
+    "value": 1,
+    "ucum": "[rch_us]/100"
+  },
+  "[fth_us]": {
+    "value": 6,
+    "ucum": "[ft_us]"
+  },
+  "[fur_us]": {
+    "value": 40,
+    "ucum": "[rd_us]"
+  },
+  "[mi_us]": {
+    "value": 8,
+    "ucum": "[fur_us]"
+  },
+  "[acr_us]": {
+    "value": 160,
+    "ucum": "[rd_us]2"
+  },
+  "[srd_us]": {
+    "value": 1,
+    "ucum": "[rd_us]2"
+  },
+  "[smi_us]": {
+    "value": 1,
+    "ucum": "[mi_us]2"
+  },
+  "[sct]": {
+    "value": 1,
+    "ucum": "[mi_us]2"
+  },
+  "[twp]": {
+    "value": 36,
+    "ucum": "[sct]"
+  },
+  "[mil_us]": {
+    "value": 0.001,
+    "ucum": "[in_us]"
+  },
+  "[in_br]": {
+    "value": 2.539998,
+    "ucum": "cm"
+  },
+  "[ft_br]": {
+    "value": 12,
+    "ucum": "[in_br]"
+  },
+  "[rd_br]": {
+    "value": 16.5,
+    "ucum": "[ft_br]"
+  },
+  "[ch_br]": {
+    "value": 4,
+    "ucum": "[rd_br]"
+  },
+  "[lk_br]": {
+    "value": 1,
+    "ucum": "[ch_br]/100"
+  },
+  "[fth_br]": {
+    "value": 6,
+    "ucum": "[ft_br]"
+  },
+  "[pc_br]": {
+    "value": 2.5,
+    "ucum": "[ft_br]"
+  },
+  "[yd_br]": {
+    "value": 3,
+    "ucum": "[ft_br]"
+  },
+  "[mi_br]": {
+    "value": 5280,
+    "ucum": "[ft_br]"
+  },
+  "[nmi_br]": {
+    "value": 6080,
+    "ucum": "[ft_br]"
+  },
+  "[kn_br]": {
+    "value": 1,
+    "ucum": "[nmi_br]/h"
+  },
+  "[acr_br]": {
+    "value": 4840,
+    "ucum": "[yd_br]2"
+  },
+  "[gal_us]": {
+    "value": 231,
+    "ucum": "[in_i]3"
+  },
+  "[bbl_us]": {
+    "value": 42,
+    "ucum": "[gal_us]"
+  },
+  "[qt_us]": {
+    "value": 1,
+    "ucum": "[gal_us]/4"
+  },
+  "[pt_us]": {
+    "value": 1,
+    "ucum": "[qt_us]/2"
+  },
+  "[gil_us]": {
+    "value": 1,
+    "ucum": "[pt_us]/4"
+  },
+  "[foz_us]": {
+    "value": 1,
+    "ucum": "[gil_us]/4"
+  },
+  "[fdr_us]": {
+    "value": 1,
+    "ucum": "[foz_us]/8"
+  },
+  "[min_us]": {
+    "value": 1,
+    "ucum": "[fdr_us]/60"
+  },
+  "[crd_us]": {
+    "value": 128,
+    "ucum": "[ft_i]3"
+  },
+  "[bu_us]": {
+    "value": 2150.42,
+    "ucum": "[in_i]3"
+  },
+  "[gal_wi]": {
+    "value": 1,
+    "ucum": "[bu_us]/8"
+  },
+  "[pk_us]": {
+    "value": 1,
+    "ucum": "[bu_us]/4"
+  },
+  "[dqt_us]": {
+    "value": 1,
+    "ucum": "[pk_us]/8"
+  },
+  "[dpt_us]": {
+    "value": 1,
+    "ucum": "[dqt_us]/2"
+  },
+  "[tbs_us]": {
+    "value": 1,
+    "ucum": "[foz_us]/2"
+  },
+  "[tsp_us]": {
+    "value": 1,
+    "ucum": "[tbs_us]/3"
+  },
+  "[cup_us]": {
+    "value": 16,
+    "ucum": "[tbs_us]"
+  },
+  "[foz_m]": {
+    "value": 30,
+    "ucum": "mL"
+  },
+  "[cup_m]": {
+    "value": 240,
+    "ucum": "mL"
+  },
+  "[tsp_m]": {
+    "value": 5,
+    "ucum": "mL"
+  },
+  "[tbs_m]": {
+    "value": 15,
+    "ucum": "mL"
+  },
+  "[gal_br]": {
+    "value": 4.54609,
+    "ucum": "l"
+  },
+  "[pk_br]": {
+    "value": 2,
+    "ucum": "[gal_br]"
+  },
+  "[bu_br]": {
+    "value": 4,
+    "ucum": "[pk_br]"
+  },
+  "[qt_br]": {
+    "value": 1,
+    "ucum": "[gal_br]/4"
+  },
+  "[pt_br]": {
+    "value": 1,
+    "ucum": "[qt_br]/2"
+  },
+  "[gil_br]": {
+    "value": 1,
+    "ucum": "[pt_br]/4"
+  },
+  "[foz_br]": {
+    "value": 1,
+    "ucum": "[gil_br]/5"
+  },
+  "[fdr_br]": {
+    "value": 1,
+    "ucum": "[foz_br]/8"
+  },
+  "[min_br]": {
+    "value": 1,
+    "ucum": "[fdr_br]/60"
+  },
+  "[gr]": {
+    "value": 64.79891,
+    "ucum": "mg"
+  },
+  "[lb_av]": {
+    "value": 7000,
+    "ucum": "[gr]"
+  },
+  "[oz_av]": {
+    "value": 1,
+    "ucum": "[lb_av]/16"
+  },
+  "[dr_av]": {
+    "value": 1,
+    "ucum": "[oz_av]/16"
+  },
+  "[scwt_av]": {
+    "value": 100,
+    "ucum": "[lb_av]"
+  },
+  "[lcwt_av]": {
+    "value": 112,
+    "ucum": "[lb_av]"
+  },
+  "[ston_av]": {
+    "value": 20,
+    "ucum": "[scwt_av]"
+  },
+  "[lton_av]": {
+    "value": 20,
+    "ucum": "[lcwt_av]"
+  },
+  "[stone_av]": {
+    "value": 14,
+    "ucum": "[lb_av]"
+  },
+  "[pwt_tr]": {
+    "value": 24,
+    "ucum": "[gr]"
+  },
+  "[oz_tr]": {
+    "value": 20,
+    "ucum": "[pwt_tr]"
+  },
+  "[lb_tr]": {
+    "value": 12,
+    "ucum": "[oz_tr]"
+  },
+  "[sc_ap]": {
+    "value": 20,
+    "ucum": "[gr]"
+  },
+  "[dr_ap]": {
+    "value": 3,
+    "ucum": "[sc_ap]"
+  },
+  "[oz_ap]": {
+    "value": 8,
+    "ucum": "[dr_ap]"
+  },
+  "[lb_ap]": {
+    "value": 12,
+    "ucum": "[oz_ap]"
+  },
+  "[oz_m]": {
+    "value": 28,
+    "ucum": "g"
+  },
+  "[lne]": {
+    "value": 1,
+    "ucum": "[in_i]/12"
+  },
+  "[pnt]": {
+    "value": 1,
+    "ucum": "[lne]/6"
+  },
+  "[pca]": {
+    "value": 12,
+    "ucum": "[pnt]"
+  },
+  "[pnt_pr]": {
+    "value": 0.013837,
+    "ucum": "[in_i]"
+  },
+  "[pca_pr]": {
+    "value": 12,
+    "ucum": "[pnt_pr]"
+  },
+  "[pied]": {
+    "value": 32.48,
+    "ucum": "cm"
+  },
+  "[pouce]": {
+    "value": 1,
+    "ucum": "[pied]/12"
+  },
+  "[ligne]": {
+    "value": 1,
+    "ucum": "[pouce]/12"
+  },
+  "[didot]": {
+    "value": 1,
+    "ucum": "[ligne]/6"
+  },
+  "[cicero]": {
+    "value": 12,
+    "ucum": "[didot]"
+  },
+  "[degF]": {
+    "ucum": "degf(5 K/9)"
+  },
+  "[degR]": {
+    "value": 5,
+    "ucum": "K/9"
+  },
+  "cal_[15]": {
+    "value": 4.1858,
+    "ucum": "J"
+  },
+  "cal_[20]": {
+    "value": 4.1819,
+    "ucum": "J"
+  },
+  "cal_m": {
+    "value": 4.19002,
+    "ucum": "J"
+  },
+  "cal_IT": {
+    "value": 4.1868,
+    "ucum": "J"
+  },
+  "cal_th": {
+    "value": 4.184,
+    "ucum": "J"
+  },
+  "cal": {
+    "value": 1,
+    "ucum": "cal_th"
+  },
+  "[Cal]": {
+    "value": 1,
+    "ucum": "kcal_th"
+  },
+  "[Btu_39]": {
+    "value": 1.05967,
+    "ucum": "kJ"
+  },
+  "[Btu_59]": {
+    "value": 1.0548,
+    "ucum": "kJ"
+  },
+  "[Btu_60]": {
+    "value": 1.05468,
+    "ucum": "kJ"
+  },
+  "[Btu_m]": {
+    "value": 1.05587,
+    "ucum": "kJ"
+  },
+  "[Btu_IT]": {
+    "value": 1.05505585262,
+    "ucum": "kJ"
+  },
+  "[Btu_th]": {
+    "value": 1.05435,
+    "ucum": "kJ"
+  },
+  "[Btu]": {
+    "value": 1,
+    "ucum": "[Btu_th]"
+  },
+  "[HP]": {
+    "value": 550,
+    "ucum": "[ft_i].[lbf_av]/s"
+  },
+  "tex": {
+    "value": 1,
+    "ucum": "g/km"
+  },
+  "[den]": {
+    "value": 1,
+    "ucum": "g/9/km"
+  },
+  "m[H2O]": {
+    "value": 9.806650000000001,
+    "ucum": "kPa"
+  },
+  "m[Hg]": {
+    "value": 133.322,
+    "ucum": "kPa"
+  },
+  "[in_i'H2O]": {
+    "value": 1,
+    "ucum": "m[H2O].[in_i]/m"
+  },
+  "[in_i'Hg]": {
+    "value": 1,
+    "ucum": "m[Hg].[in_i]/m"
+  },
+  "[PRU]": {
+    "value": 1,
+    "ucum": "mm[Hg].s/ml"
+  },
+  "[wood'U]": {
+    "value": 1,
+    "ucum": "mm[Hg].min/L"
+  },
+  "[diop]": {
+    "value": 1,
+    "ucum": "/m"
+  },
+  "[p'diop]": {
+    "ucum": "100tan(1 rad)"
+  },
+  "%[slope]": {
+    "ucum": "100tan(1 rad)"
+  },
+  "[mesh_i]": {
+    "value": 1,
+    "ucum": "/[in_i]"
+  },
+  "[Ch]": {
+    "value": 1,
+    "ucum": "mm/3"
+  },
+  "[drp]": {
+    "value": 1,
+    "ucum": "ml/20"
+  },
+  "[hnsf'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[MET]": {
+    "value": 3.5,
+    "ucum": "mL/min/kg"
+  },
+  "[hp'_X]": {
+    "ucum": "hpX(1 1)"
+  },
+  "[hp'_C]": {
+    "ucum": "hpC(1 1)"
+  },
+  "[hp'_M]": {
+    "ucum": "hpM(1 1)"
+  },
+  "[hp'_Q]": {
+    "ucum": "hpQ(1 1)"
+  },
+  "[hp_X]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[hp_C]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[hp_M]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[hp_Q]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[kp_X]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[kp_C]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[kp_M]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[kp_Q]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "eq": {
+    "value": 1,
+    "ucum": "mol"
+  },
+  "osm": {
+    "value": 1,
+    "ucum": "mol"
+  },
+  "[pH]": {
+    "ucum": "pH(1 mol/l)"
+  },
+  "g%": {
+    "value": 1,
+    "ucum": "g/dl"
+  },
+  "[S]": {
+    "value": 1,
+    "ucum": "10*-13.s"
+  },
+  "[HPF]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[LPF]": {
+    "value": 100,
+    "ucum": "1"
+  },
+  "kat": {
+    "value": 1,
+    "ucum": "mol/s"
+  },
+  "U": {
+    "value": 1,
+    "ucum": "umol/min"
+  },
+  "[iU]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[IU]": {
+    "value": 1,
+    "ucum": "[iU]"
+  },
+  "[arb'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[USP'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[GPL'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[MPL'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[APL'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[beth'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[anti'Xa'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[todd'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[dye'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[smgy'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[bdsk'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[ka'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[knk'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[mclg'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[tb'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[CCID_50]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[TCID_50]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[EID_50]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[PFU]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[FFU]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[CFU]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[BAU]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[AU]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[Amb'a'1'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[PNU]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[Lf]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[D'ag'U]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[FEU]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[ELU]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "[EU]": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "Np": {
+    "ucum": "ln(1 1)"
+  },
+  "B": {
+    "ucum": "lg(1 1)"
+  },
+  "B[SPL]": {
+    "ucum": "2lg(2 10*-5.Pa)"
+  },
+  "B[V]": {
+    "ucum": "2lg(1 V)"
+  },
+  "B[mV]": {
+    "ucum": "2lg(1 mV)"
+  },
+  "B[uV]": {
+    "ucum": "2lg(1 uV)"
+  },
+  "B[10.nV]": {
+    "ucum": "2lg(10 nV)"
+  },
+  "B[W]": {
+    "ucum": "lg(1 W)"
+  },
+  "B[kW]": {
+    "ucum": "lg(1 kW)"
+  },
+  "st": {
+    "value": 1,
+    "ucum": "m3"
+  },
+  "Ao": {
+    "value": 0.1,
+    "ucum": "nm"
+  },
+  "b": {
+    "value": 100,
+    "ucum": "fm2"
+  },
+  "att": {
+    "value": 1,
+    "ucum": "kgf/cm2"
+  },
+  "mho": {
+    "value": 1,
+    "ucum": "S"
+  },
+  "[psi]": {
+    "value": 1,
+    "ucum": "[lbf_av]/[in_i]2"
+  },
+  "circ": {
+    "value": 2,
+    "ucum": "[pi].rad"
+  },
+  "sph": {
+    "value": 4,
+    "ucum": "[pi].sr"
+  },
+  "[car_m]": {
+    "value": 0.2,
+    "ucum": "g"
+  },
+  "[car_Au]": {
+    "value": 1,
+    "ucum": "/24"
+  },
+  "[smoot]": {
+    "value": 67,
+    "ucum": "[in_i]"
+  },
+  "bit_s": {
+    "ucum": "ld(1 1)"
+  },
+  "bit": {
+    "value": 1,
+    "ucum": "1"
+  },
+  "By": {
+    "value": 8,
+    "ucum": "bit"
+  },
+  "Bd": {
+    "value": 1,
+    "ucum": "/s"
+  }
 }
