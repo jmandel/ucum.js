@@ -1,0 +1,70 @@
+{
+  helpers = require('../lib/helpers');
+  prefixes = require('./prefixes.json');
+  multiply = helpers.multiply;
+  topower = helpers.topower;
+  cleanup = helpers.cleanup;
+}
+
+start = e:ucumExpr {
+  return e ; // cleanup(e);
+}
+
+ucumExpr = "/" e:expr {return multiply({value:1, units:{}}, [["/", e]]);} / expr
+
+multiply  = "." term /  "/" term
+
+expr =  t:term ms:(multiply)* {
+  return multiply(t, ms);
+}
+
+term = e:element exp:(exponent)? (ANN)* {
+  return topower(e, exp);
+}
+element  = u:simpleUnit /  "(" e:expr ")" {return e;} / ANN
+
+exponent =  s:([+-])? d:DIGITS {return (s=="-") ? (-1*d) : d}
+
+simpleUnit =   a:ATOM {
+ var ret = {
+    value: 1,
+    units: {}
+  };
+  ret.units[a] =  1;
+  return ret;
+} /
+ p:PREFIX a:METRICATOM {
+  var ret = {
+    value: prefixes[p],
+    units: {}
+  };
+  ret.units[a] =  1;
+  return ret;
+} / a:METRICATOM  {
+ var ret = {
+    value: 1,
+    units: {}
+  };
+  ret.units[a] =  1;
+  return ret;
+}
+ /  d:DIGITS {
+ var ret = {
+    value: d,
+    units: {}
+  };
+  return ret;
+}
+
+
+DIGITS = v:[0-9]+ 'e'? e:exponent?  {
+  return parseInt(v.join(""))*Math.pow(10, e||0);
+} 
+
+ANN = "{" m:[^}]+ "}" { return "{"+m.join("")+"}" }
+
+ATOM = {{ATOM}}
+
+METRICATOM = {{METRICATOM}}
+
+PREFIX = {{PREFIX}}

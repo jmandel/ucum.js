@@ -1,0 +1,10 @@
+*.log
+*.pyc
+*.tmproj
+*~
+.project
+*#
+.#*
+*.swo
+*.swp
+node_modules
