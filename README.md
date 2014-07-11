@@ -28,3 +28,17 @@ console.log(canonical);
 { value: 8.048774304763354e-10, units: { m: 1, s: -1 } } 
 ```
 
+
+### To use in browser
+
+Save and include a `<script>` tag for [dist/ucum.js](dist/ucum.js)
+
+### To build
+
+```
+$ git clone https://github.com/jmandel/ucum.js
+$ cd ucum.js
+$ npm install
+$ make
+```
+
