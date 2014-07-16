@@ -1,9 +1,11 @@
 {
   helpers = require('../lib/helpers');
   prefixes = require('./prefixes.json');
+  metrics = require('./metrics.json');
   multiply = helpers.multiply;
   topower = helpers.topower;
   cleanup = helpers.cleanup;
+  ismetric = helpers.ismetric(metrics);
 }
 
 start = e:ucumExpr {
@@ -21,34 +23,15 @@ expr =  t:term ms:(multiply)* {
 term = e:element exp:(exponent)? (ANN)* {
   return topower(e, exp);
 }
-element  = u:simpleUnit /  "(" e:expr ")" {return e;} / ANN
+element  =  a:ANN? u:simpleUnit {return u;} /  "(" e:expr ")" {return e;} / ANN
 
 exponent =  s:([+-])? d:DIGITS {return (s=="-") ? (-1*d) : d}
 
-simpleUnit =   a:ATOM {
- var ret = {
-    value: 1,
-    units: {}
-  };
-  ret.units[a] =  1;
+simpleUnit =  p:PREFIX? a:METRICATOM !{return(p && !ismetric(a));} {
+  var ret = a;
+  if (p) ret.value = ret.value * prefixes[p];
   return ret;
-} /
- p:PREFIX a:METRICATOM {
-  var ret = {
-    value: prefixes[p],
-    units: {}
-  };
-  ret.units[a] =  1;
-  return ret;
-} / a:METRICATOM  {
- var ret = {
-    value: 1,
-    units: {}
-  };
-  ret.units[a] =  1;
-  return ret;
-}
- /  d:DIGITS {
+} / METRICATOM / d:DIGITS {
  var ret = {
     value: d,
     units: {}
@@ -61,317 +44,315 @@ DIGITS = v:[0-9]+ 'e'? e:exponent?  {
   return parseInt(v.join(""))*Math.pow(10, e||0);
 } 
 
-ANN = "{" m:[^}]+ "}" { return "{"+m.join("")+"}" }
+ANN = "{" m:[^}]+ "}" { return {value: 1, units:{}} }
 
-ATOM = "10*" 
-/ "10^" 
-/ "[pi]" 
-/ "%" 
-/ "[ppth]" 
-/ "[ppm]" 
-/ "[ppb]" 
-/ "[pptr]" 
-/ "gon" 
-/ "deg" 
-/ "'" 
-/ "''" 
-/ "min" 
-/ "h" 
-/ "d" 
-/ "a_t" 
-/ "a_j" 
-/ "a_g" 
-/ "a" 
-/ "wk" 
-/ "mo_s" 
-/ "mo_j" 
-/ "mo_g" 
-/ "mo" 
-/ "AU" 
-/ "atm" 
-/ "[lbf_av]" 
-/ "[in_i]" 
-/ "[ft_i]" 
-/ "[yd_i]" 
-/ "[mi_i]" 
-/ "[fth_i]" 
-/ "[nmi_i]" 
-/ "[kn_i]" 
-/ "[sin_i]" 
-/ "[sft_i]" 
-/ "[syd_i]" 
-/ "[cin_i]" 
-/ "[cft_i]" 
-/ "[cyd_i]" 
-/ "[bf_i]" 
-/ "[cr_i]" 
-/ "[mil_i]" 
-/ "[cml_i]" 
-/ "[hd_i]" 
-/ "[ft_us]" 
-/ "[yd_us]" 
-/ "[in_us]" 
-/ "[rd_us]" 
-/ "[ch_us]" 
-/ "[lk_us]" 
-/ "[rch_us]" 
-/ "[rlk_us]" 
-/ "[fth_us]" 
-/ "[fur_us]" 
-/ "[mi_us]" 
-/ "[acr_us]" 
-/ "[srd_us]" 
-/ "[smi_us]" 
-/ "[sct]" 
-/ "[twp]" 
-/ "[mil_us]" 
-/ "[in_br]" 
-/ "[ft_br]" 
-/ "[rd_br]" 
-/ "[ch_br]" 
-/ "[lk_br]" 
-/ "[fth_br]" 
-/ "[pc_br]" 
-/ "[yd_br]" 
-/ "[mi_br]" 
-/ "[nmi_br]" 
-/ "[kn_br]" 
-/ "[acr_br]" 
-/ "[gal_us]" 
-/ "[bbl_us]" 
-/ "[qt_us]" 
-/ "[pt_us]" 
-/ "[gil_us]" 
-/ "[foz_us]" 
-/ "[fdr_us]" 
-/ "[min_us]" 
-/ "[crd_us]" 
-/ "[bu_us]" 
-/ "[gal_wi]" 
-/ "[pk_us]" 
-/ "[dqt_us]" 
-/ "[dpt_us]" 
-/ "[tbs_us]" 
-/ "[tsp_us]" 
-/ "[cup_us]" 
-/ "[foz_m]" 
-/ "[cup_m]" 
-/ "[tsp_m]" 
-/ "[tbs_m]" 
-/ "[gal_br]" 
-/ "[pk_br]" 
-/ "[bu_br]" 
-/ "[qt_br]" 
-/ "[pt_br]" 
-/ "[gil_br]" 
-/ "[foz_br]" 
-/ "[fdr_br]" 
-/ "[min_br]" 
-/ "[gr]" 
-/ "[lb_av]" 
-/ "[oz_av]" 
-/ "[dr_av]" 
-/ "[scwt_av]" 
-/ "[lcwt_av]" 
-/ "[ston_av]" 
-/ "[lton_av]" 
-/ "[stone_av]" 
-/ "[pwt_tr]" 
-/ "[oz_tr]" 
-/ "[lb_tr]" 
-/ "[sc_ap]" 
-/ "[dr_ap]" 
-/ "[oz_ap]" 
-/ "[lb_ap]" 
-/ "[oz_m]" 
-/ "[lne]" 
-/ "[pnt]" 
-/ "[pca]" 
-/ "[pnt_pr]" 
-/ "[pca_pr]" 
-/ "[pied]" 
-/ "[pouce]" 
-/ "[ligne]" 
-/ "[didot]" 
-/ "[cicero]" 
-/ "[degF]" 
-/ "[degR]" 
-/ "[Cal]" 
-/ "[Btu_39]" 
-/ "[Btu_59]" 
-/ "[Btu_60]" 
-/ "[Btu_m]" 
-/ "[Btu_IT]" 
-/ "[Btu_th]" 
-/ "[Btu]" 
-/ "[HP]" 
-/ "[den]" 
-/ "[in_i'H2O]" 
-/ "[in_i'Hg]" 
-/ "[PRU]" 
-/ "[wood'U]" 
-/ "[diop]" 
-/ "[p'diop]" 
-/ "%[slope]" 
-/ "[mesh_i]" 
-/ "[Ch]" 
-/ "[drp]" 
-/ "[hnsf'U]" 
-/ "[MET]" 
-/ "[hp'_X]" 
-/ "[hp'_C]" 
-/ "[hp'_M]" 
-/ "[hp'_Q]" 
-/ "[hp_X]" 
-/ "[hp_C]" 
-/ "[hp_M]" 
-/ "[hp_Q]" 
-/ "[kp_X]" 
-/ "[kp_C]" 
-/ "[kp_M]" 
-/ "[kp_Q]" 
-/ "[pH]" 
-/ "[S]" 
-/ "[HPF]" 
-/ "[LPF]" 
-/ "[arb'U]" 
-/ "[USP'U]" 
-/ "[GPL'U]" 
-/ "[MPL'U]" 
-/ "[APL'U]" 
-/ "[beth'U]" 
-/ "[anti'Xa'U]" 
-/ "[todd'U]" 
-/ "[dye'U]" 
-/ "[smgy'U]" 
-/ "[bdsk'U]" 
-/ "[ka'U]" 
-/ "[knk'U]" 
-/ "[mclg'U]" 
-/ "[tb'U]" 
-/ "[CCID_50]" 
-/ "[TCID_50]" 
-/ "[EID_50]" 
-/ "[PFU]" 
-/ "[FFU]" 
-/ "[CFU]" 
-/ "[BAU]" 
-/ "[AU]" 
-/ "[Amb'a'1'U]" 
-/ "[PNU]" 
-/ "[Lf]" 
-/ "[D'ag'U]" 
-/ "[FEU]" 
-/ "[ELU]" 
-/ "[EU]" 
-/ "Ao" 
-/ "b" 
-/ "att" 
-/ "[psi]" 
-/ "circ" 
-/ "sph" 
-/ "[car_m]" 
-/ "[car_Au]" 
-/ "[smoot]" 
-/ "bit_s"
-
-METRICATOM = "mol" 
-/ "sr" 
-/ "Hz" 
-/ "N" 
-/ "Pa" 
-/ "J" 
-/ "W" 
-/ "A" 
-/ "V" 
-/ "F" 
-/ "Ohm" 
-/ "S" 
-/ "Wb" 
-/ "Cel" 
-/ "T" 
-/ "H" 
-/ "lm" 
-/ "lx" 
-/ "Bq" 
-/ "Gy" 
-/ "Sv" 
-/ "l" 
-/ "L" 
-/ "ar" 
-/ "t" 
-/ "bar" 
-/ "u" 
-/ "eV" 
-/ "pc" 
-/ "[c]" 
-/ "[h]" 
-/ "[k]" 
-/ "[eps_0]" 
-/ "[mu_0]" 
-/ "[e]" 
-/ "[m_e]" 
-/ "[m_p]" 
-/ "[G]" 
-/ "[g]" 
-/ "[ly]" 
-/ "gf" 
-/ "Ky" 
-/ "Gal" 
-/ "dyn" 
-/ "erg" 
-/ "P" 
-/ "Bi" 
-/ "St" 
-/ "Mx" 
-/ "G" 
-/ "Oe" 
-/ "Gb" 
-/ "sb" 
-/ "Lmb" 
-/ "ph" 
-/ "Ci" 
-/ "R" 
-/ "RAD" 
-/ "REM" 
-/ "cal_[15]" 
-/ "cal_[20]" 
-/ "cal_m" 
-/ "cal_IT" 
-/ "cal_th" 
-/ "cal" 
-/ "tex" 
-/ "m[H2O]" 
-/ "m[Hg]" 
-/ "eq" 
-/ "osm" 
-/ "g%" 
-/ "kat" 
-/ "U" 
-/ "[iU]" 
-/ "[IU]" 
-/ "Np" 
-/ "B" 
-/ "B[SPL]" 
-/ "B[V]" 
-/ "B[mV]" 
-/ "B[uV]" 
-/ "B[10.nV]" 
-/ "B[W]" 
-/ "B[kW]" 
-/ "st" 
-/ "mho" 
-/ "bit" 
-/ "By" 
-/ "Bd" 
-/ "m" 
-/ "s" 
-/ "g" 
-/ "rad" 
-/ "K" 
-/ "C" 
-/ "cd"
-
+METRICATOM = u:"[anti'Xa'U]" {return {value: 1, units: {"[anti'Xa'U]": 1}};} 
+/ u:"[Amb'a'1'U]" {return {value: 1, units: {"[Amb'a'1'U]": 1}};} 
+/ u:"[stone_av]" {return {value: 1, units: {"[stone_av]": 1}};} 
+/ u:"[in_i'H2O]" {return {value: 1, units: {"[in_i'H2O]": 1}};} 
+/ u:"[ston_av]" {return {value: 1, units: {"[ston_av]": 1}};} 
+/ u:"[TCID_50]" {return {value: 1, units: {"[TCID_50]": 1}};} 
+/ u:"[CCID_50]" {return {value: 1, units: {"[CCID_50]": 1}};} 
+/ u:"[scwt_av]" {return {value: 1, units: {"[scwt_av]": 1}};} 
+/ u:"[lcwt_av]" {return {value: 1, units: {"[lcwt_av]": 1}};} 
+/ u:"[lton_av]" {return {value: 1, units: {"[lton_av]": 1}};} 
+/ u:"[in_i'Hg]" {return {value: 1, units: {"[in_i'Hg]": 1}};} 
+/ u:"[tbs_us]" {return {value: 1, units: {"[tbs_us]": 1}};} 
+/ u:"[dpt_us]" {return {value: 1, units: {"[dpt_us]": 1}};} 
+/ u:"[bdsk'U]" {return {value: 1, units: {"[bdsk'U]": 1}};} 
+/ u:"[smgy'U]" {return {value: 1, units: {"[smgy'U]": 1}};} 
+/ u:"[dqt_us]" {return {value: 1, units: {"[dqt_us]": 1}};} 
+/ u:"[todd'U]" {return {value: 1, units: {"[todd'U]": 1}};} 
+/ u:"[D'ag'U]" {return {value: 1, units: {"[D'ag'U]": 1}};} 
+/ u:"[beth'U]" {return {value: 1, units: {"[beth'U]": 1}};} 
+/ u:"[gal_wi]" {return {value: 1, units: {"[gal_wi]": 1}};} 
+/ u:"[crd_us]" {return {value: 1, units: {"[crd_us]": 1}};} 
+/ u:"[min_us]" {return {value: 1, units: {"[min_us]": 1}};} 
+/ u:"[fdr_us]" {return {value: 1, units: {"[fdr_us]": 1}};} 
+/ u:"[foz_us]" {return {value: 1, units: {"[foz_us]": 1}};} 
+/ u:"[gil_us]" {return {value: 1, units: {"[gil_us]": 1}};} 
+/ u:"[bbl_us]" {return {value: 1, units: {"[bbl_us]": 1}};} 
+/ u:"[gal_us]" {return {value: 1, units: {"[gal_us]": 1}};} 
+/ u:"[acr_br]" {return {value: 1, units: {"[acr_br]": 1}};} 
+/ u:"[nmi_br]" {return {value: 1, units: {"[nmi_br]": 1}};} 
+/ u:"[fth_br]" {return {value: 1, units: {"[fth_br]": 1}};} 
+/ u:"[mil_us]" {return {value: 1, units: {"[mil_us]": 1}};} 
+/ u:"[smi_us]" {return {value: 1, units: {"[smi_us]": 1}};} 
+/ u:"[acr_us]" {return {value: 1, units: {"[acr_us]": 1}};} 
+/ u:"[fur_us]" {return {value: 1, units: {"[fur_us]": 1}};} 
+/ u:"[fth_us]" {return {value: 1, units: {"[fth_us]": 1}};} 
+/ u:"[rlk_us]" {return {value: 1, units: {"[rlk_us]": 1}};} 
+/ u:"[rch_us]" {return {value: 1, units: {"[rch_us]": 1}};} 
+/ u:"[lbf_av]" {return {value: 1, units: {"[lbf_av]": 1}};} 
+/ u:"[hnsf'U]" {return {value: 1, units: {"[hnsf'U]": 1}};} 
+/ u:"[mesh_i]" {return {value: 1, units: {"[mesh_i]": 1}};} 
+/ u:"%[slope]" {return {value: 1, units: {"%[slope]": 1}};} 
+/ u:"[p'diop]" {return {value: 1, units: {"[p'diop]": 1}};} 
+/ u:"[gil_br]" {return {value: 1, units: {"[gil_br]": 1}};} 
+/ u:"[wood'U]" {return {value: 1, units: {"[wood'U]": 1}};} 
+/ u:"cal_[15]" {return {value: 1, units: {"cal_[15]": 1}};} 
+/ u:"cal_[20]" {return {value: 1, units: {"cal_[20]": 1}};} 
+/ u:"[foz_br]" {return {value: 1, units: {"[foz_br]": 1}};} 
+/ u:"[fdr_br]" {return {value: 1, units: {"[fdr_br]": 1}};} 
+/ u:"[srd_us]" {return {value: 1, units: {"[srd_us]": 1}};} 
+/ u:"[min_br]" {return {value: 1, units: {"[min_br]": 1}};} 
+/ u:"[EID_50]" {return {value: 1, units: {"[EID_50]": 1}};} 
+/ u:"[Btu_th]" {return {value: 1, units: {"[Btu_th]": 1}};} 
+/ u:"[Btu_IT]" {return {value: 1, units: {"[Btu_IT]": 1}};} 
+/ u:"[car_Au]" {return {value: 1, units: {"[car_Au]": 1}};} 
+/ u:"[Btu_60]" {return {value: 1, units: {"[Btu_60]": 1}};} 
+/ u:"[Btu_59]" {return {value: 1, units: {"[Btu_59]": 1}};} 
+/ u:"[Btu_39]" {return {value: 1, units: {"[Btu_39]": 1}};} 
+/ u:"[cup_us]" {return {value: 1, units: {"[cup_us]": 1}};} 
+/ u:"B[10.nV]" {return {value: 1, units: {"B[10.nV]": 1}};} 
+/ u:"[tsp_us]" {return {value: 1, units: {"[tsp_us]": 1}};} 
+/ u:"[mclg'U]" {return {value: 1, units: {"[mclg'U]": 1}};} 
+/ u:"[cicero]" {return {value: 1, units: {"[cicero]": 1}};} 
+/ u:"[pwt_tr]" {return {value: 1, units: {"[pwt_tr]": 1}};} 
+/ u:"[pnt_pr]" {return {value: 1, units: {"[pnt_pr]": 1}};} 
+/ u:"[pca_pr]" {return {value: 1, units: {"[pca_pr]": 1}};} 
+/ u:"[gal_br]" {return {value: 1, units: {"[gal_br]": 1}};} 
+/ u:"[yd_us]" {return {value: 1, units: {"[yd_us]": 1}};} 
+/ u:"[ligne]" {return {value: 1, units: {"[ligne]": 1}};} 
+/ u:"[tbs_m]" {return {value: 1, units: {"[tbs_m]": 1}};} 
+/ u:"[lb_ap]" {return {value: 1, units: {"[lb_ap]": 1}};} 
+/ u:"[oz_ap]" {return {value: 1, units: {"[oz_ap]": 1}};} 
+/ u:"[dr_ap]" {return {value: 1, units: {"[dr_ap]": 1}};} 
+/ u:"[sc_ap]" {return {value: 1, units: {"[sc_ap]": 1}};} 
+/ u:"[tsp_m]" {return {value: 1, units: {"[tsp_m]": 1}};} 
+/ u:"[cup_m]" {return {value: 1, units: {"[cup_m]": 1}};} 
+/ u:"[lb_tr]" {return {value: 1, units: {"[lb_tr]": 1}};} 
+/ u:"[oz_tr]" {return {value: 1, units: {"[oz_tr]": 1}};} 
+/ u:"[didot]" {return {value: 1, units: {"[didot]": 1}};} 
+/ u:"[foz_m]" {return {value: 1, units: {"[foz_m]": 1}};} 
+/ u:"[car_m]" {return {value: 1, units: {"[car_m]": 1}};} 
+/ u:"[smoot]" {return {value: 1, units: {"[smoot]": 1}};} 
+/ u:"[knk'U]" {return {value: 1, units: {"[knk'U]": 1}};} 
+/ u:"[Btu_m]" {return {value: 1, units: {"[Btu_m]": 1}};} 
+/ u:"[dr_av]" {return {value: 1, units: {"[dr_av]": 1}};} 
+/ u:"[oz_av]" {return {value: 1, units: {"[oz_av]": 1}};} 
+/ u:"[lb_av]" {return {value: 1, units: {"[lb_av]": 1}};} 
+/ u:"[dye'U]" {return {value: 1, units: {"[dye'U]": 1}};} 
+/ u:"[pk_us]" {return {value: 1, units: {"[pk_us]": 1}};} 
+/ u:"[APL'U]" {return {value: 1, units: {"[APL'U]": 1}};} 
+/ u:"[bu_us]" {return {value: 1, units: {"[bu_us]": 1}};} 
+/ u:"[pt_br]" {return {value: 1, units: {"[pt_br]": 1}};} 
+/ u:"[qt_br]" {return {value: 1, units: {"[qt_br]": 1}};} 
+/ u:"[bu_br]" {return {value: 1, units: {"[bu_br]": 1}};} 
+/ u:"[hp'_X]" {return {value: 1, units: {"[hp'_X]": 1}};} 
+/ u:"[MPL'U]" {return {value: 1, units: {"[MPL'U]": 1}};} 
+/ u:"[GPL'U]" {return {value: 1, units: {"[GPL'U]": 1}};} 
+/ u:"[USP'U]" {return {value: 1, units: {"[USP'U]": 1}};} 
+/ u:"[eps_0]" {return {value: 1, units: {"[eps_0]": 1}};} 
+/ u:"[fth_i]" {return {value: 1, units: {"[fth_i]": 1}};} 
+/ u:"[nmi_i]" {return {value: 1, units: {"[nmi_i]": 1}};} 
+/ u:"[pt_us]" {return {value: 1, units: {"[pt_us]": 1}};} 
+/ u:"[sin_i]" {return {value: 1, units: {"[sin_i]": 1}};} 
+/ u:"[sft_i]" {return {value: 1, units: {"[sft_i]": 1}};} 
+/ u:"[syd_i]" {return {value: 1, units: {"[syd_i]": 1}};} 
+/ u:"[cin_i]" {return {value: 1, units: {"[cin_i]": 1}};} 
+/ u:"[cft_i]" {return {value: 1, units: {"[cft_i]": 1}};} 
+/ u:"[cyd_i]" {return {value: 1, units: {"[cyd_i]": 1}};} 
+/ u:"[qt_us]" {return {value: 1, units: {"[qt_us]": 1}};} 
+/ u:"[arb'U]" {return {value: 1, units: {"[arb'U]": 1}};} 
+/ u:"[mil_i]" {return {value: 1, units: {"[mil_i]": 1}};} 
+/ u:"[cml_i]" {return {value: 1, units: {"[cml_i]": 1}};} 
+/ u:"[kn_br]" {return {value: 1, units: {"[kn_br]": 1}};} 
+/ u:"[ft_us]" {return {value: 1, units: {"[ft_us]": 1}};} 
+/ u:"[pouce]" {return {value: 1, units: {"[pouce]": 1}};} 
+/ u:"[in_us]" {return {value: 1, units: {"[in_us]": 1}};} 
+/ u:"[rd_us]" {return {value: 1, units: {"[rd_us]": 1}};} 
+/ u:"[ch_us]" {return {value: 1, units: {"[ch_us]": 1}};} 
+/ u:"[lk_us]" {return {value: 1, units: {"[lk_us]": 1}};} 
+/ u:"[hp'_C]" {return {value: 1, units: {"[hp'_C]": 1}};} 
+/ u:"[hp'_M]" {return {value: 1, units: {"[hp'_M]": 1}};} 
+/ u:"[hp'_Q]" {return {value: 1, units: {"[hp'_Q]": 1}};} 
+/ u:"[mi_br]" {return {value: 1, units: {"[mi_br]": 1}};} 
+/ u:"[mi_us]" {return {value: 1, units: {"[mi_us]": 1}};} 
+/ u:"[yd_br]" {return {value: 1, units: {"[yd_br]": 1}};} 
+/ u:"[pk_br]" {return {value: 1, units: {"[pk_br]": 1}};} 
+/ u:"[pc_br]" {return {value: 1, units: {"[pc_br]": 1}};} 
+/ u:"[lk_br]" {return {value: 1, units: {"[lk_br]": 1}};} 
+/ u:"[in_br]" {return {value: 1, units: {"[in_br]": 1}};} 
+/ u:"[ft_br]" {return {value: 1, units: {"[ft_br]": 1}};} 
+/ u:"[rd_br]" {return {value: 1, units: {"[rd_br]": 1}};} 
+/ u:"[ch_br]" {return {value: 1, units: {"[ch_br]": 1}};} 
+/ u:"[ft_i]" {return {value: 1, units: {"[ft_i]": 1}};} 
+/ u:"[hp_Q]" {return {value: 1, units: {"[hp_Q]": 1}};} 
+/ u:"[hp_M]" {return {value: 1, units: {"[hp_M]": 1}};} 
+/ u:"[hp_C]" {return {value: 1, units: {"[hp_C]": 1}};} 
+/ u:"[hp_X]" {return {value: 1, units: {"[hp_X]": 1}};} 
+/ u:"[kp_C]" {return {value: 1, units: {"[kp_C]": 1}};} 
+/ u:"[hd_i]" {return {value: 1, units: {"[hd_i]": 1}};} 
+/ u:"[kp_M]" {return {value: 1, units: {"[kp_M]": 1}};} 
+/ u:"[kp_Q]" {return {value: 1, units: {"[kp_Q]": 1}};} 
+/ u:"[cr_i]" {return {value: 1, units: {"[cr_i]": 1}};} 
+/ u:"[bf_i]" {return {value: 1, units: {"[bf_i]": 1}};} 
+/ u:"[kn_i]" {return {value: 1, units: {"[kn_i]": 1}};} 
+/ u:"[mu_0]" {return {value: 1, units: {"[mu_0]": 1}};} 
+/ u:"[mi_i]" {return {value: 1, units: {"[mi_i]": 1}};} 
+/ u:"[yd_i]" {return {value: 1, units: {"[yd_i]": 1}};} 
+/ u:"[kp_X]" {return {value: 1, units: {"[kp_X]": 1}};} 
+/ u:"[in_i]" {return {value: 1, units: {"[in_i]": 1}};} 
+/ u:"[diop]" {return {value: 1, units: {"[diop]": 1}};} 
+/ u:"cal_IT" {return {value: 1, units: {"cal_IT": 1}};} 
+/ u:"cal_th" {return {value: 1, units: {"cal_th": 1}};} 
+/ u:"m[H2O]" {return {value: 1, units: {"m[H2O]": 1}};} 
+/ u:"[ka'U]" {return {value: 1, units: {"[ka'U]": 1}};} 
+/ u:"B[SPL]" {return {value: 1, units: {"B[SPL]": 1}};} 
+/ u:"[tb'U]" {return {value: 1, units: {"[tb'U]": 1}};} 
+/ u:"[degR]" {return {value: 1, units: {"[degR]": 1}};} 
+/ u:"[degF]" {return {value: 1, units: {"[degF]": 1}};} 
+/ u:"[pptr]" {return {value: 1, units: {"[pptr]": 1}};} 
+/ u:"[ppth]" {return {value: 1, units: {"[ppth]": 1}};} 
+/ u:"[oz_m]" {return {value: 1, units: {"[oz_m]": 1}};} 
+/ u:"[pied]" {return {value: 1, units: {"[pied]": 1}};} 
+/ u:"[ppm]" {return {value: 1, units: {"[ppm]": 1}};} 
+/ u:"[ppb]" {return {value: 1, units: {"[ppb]": 1}};} 
+/ u:"bit_s" {return {value: 1, units: {"bit_s": 1}};} 
+/ u:"[PNU]" {return {value: 1, units: {"[PNU]": 1}};} 
+/ u:"[psi]" {return {value: 1, units: {"[psi]": 1}};} 
+/ u:"[BAU]" {return {value: 1, units: {"[BAU]": 1}};} 
+/ u:"[Cal]" {return {value: 1, units: {"[Cal]": 1}};} 
+/ u:"B[mV]" {return {value: 1, units: {"B[mV]": 1}};} 
+/ u:"B[uV]" {return {value: 1, units: {"B[uV]": 1}};} 
+/ u:"[CFU]" {return {value: 1, units: {"[CFU]": 1}};} 
+/ u:"[FFU]" {return {value: 1, units: {"[FFU]": 1}};} 
+/ u:"B[kW]" {return {value: 1, units: {"B[kW]": 1}};} 
+/ u:"[PFU]" {return {value: 1, units: {"[PFU]": 1}};} 
+/ u:"cal_m" {return {value: 1, units: {"cal_m": 1}};} 
+/ u:"[ELU]" {return {value: 1, units: {"[ELU]": 1}};} 
+/ u:"[FEU]" {return {value: 1, units: {"[FEU]": 1}};} 
+/ u:"[PRU]" {return {value: 1, units: {"[PRU]": 1}};} 
+/ u:"[m_e]" {return {value: 1, units: {"[m_e]": 1}};} 
+/ u:"[m_p]" {return {value: 1, units: {"[m_p]": 1}};} 
+/ u:"m[Hg]" {return {value: 1, units: {"m[Hg]": 1}};} 
+/ u:"[pca]" {return {value: 1, units: {"[pca]": 1}};} 
+/ u:"[pnt]" {return {value: 1, units: {"[pnt]": 1}};} 
+/ u:"[lne]" {return {value: 1, units: {"[lne]": 1}};} 
+/ u:"[LPF]" {return {value: 1, units: {"[LPF]": 1}};} 
+/ u:"[den]" {return {value: 1, units: {"[den]": 1}};} 
+/ u:"[sct]" {return {value: 1, units: {"[sct]": 1}};} 
+/ u:"[twp]" {return {value: 1, units: {"[twp]": 1}};} 
+/ u:"[Btu]" {return {value: 1, units: {"[Btu]": 1}};} 
+/ u:"[MET]" {return {value: 1, units: {"[MET]": 1}};} 
+/ u:"[HPF]" {return {value: 1, units: {"[HPF]": 1}};} 
+/ u:"[drp]" {return {value: 1, units: {"[drp]": 1}};} 
+/ u:"[AU]" {return {value: 1, units: {"[AU]": 1}};} 
+/ u:"[IU]" {return {value: 1, units: {"[IU]": 1}};} 
+/ u:"mo_s" {return {value: 1, units: {"mo_s": 1}};} 
+/ u:"[gr]" {return {value: 1, units: {"[gr]": 1}};} 
+/ u:"circ" {return {value: 1, units: {"circ": 1}};} 
+/ u:"[pi]" {return {value: 1, units: {"[pi]": 1}};} 
+/ u:"[EU]" {return {value: 1, units: {"[EU]": 1}};} 
+/ u:"[Lf]" {return {value: 1, units: {"[Lf]": 1}};} 
+/ u:"mo_j" {return {value: 1, units: {"mo_j": 1}};} 
+/ u:"B[W]" {return {value: 1, units: {"B[W]": 1}};} 
+/ u:"B[V]" {return {value: 1, units: {"B[V]": 1}};} 
+/ u:"mo_g" {return {value: 1, units: {"mo_g": 1}};} 
+/ u:"[iU]" {return {value: 1, units: {"[iU]": 1}};} 
+/ u:"[HP]" {return {value: 1, units: {"[HP]": 1}};} 
+/ u:"[Ch]" {return {value: 1, units: {"[Ch]": 1}};} 
+/ u:"[ly]" {return {value: 1, units: {"[ly]": 1}};} 
+/ u:"[pH]" {return {value: 1, units: {"[pH]": 1}};} 
+/ u:"a_j" {return {value: 1, units: {"a_j": 1}};} 
+/ u:"rad" {return {value: 1, units: {"rad": 1}};} 
+/ u:"a_t" {return {value: 1, units: {"a_t": 1}};} 
+/ u:"Ohm" {return {value: 1, units: {"Ohm": 1}};} 
+/ u:"sph" {return {value: 1, units: {"sph": 1}};} 
+/ u:"bit" {return {value: 1, units: {"bit": 1}};} 
+/ u:"mho" {return {value: 1, units: {"mho": 1}};} 
+/ u:"min" {return {value: 1, units: {"min": 1}};} 
+/ u:"mol" {return {value: 1, units: {"mol": 1}};} 
+/ u:"deg" {return {value: 1, units: {"deg": 1}};} 
+/ u:"gon" {return {value: 1, units: {"gon": 1}};} 
+/ u:"Cel" {return {value: 1, units: {"Cel": 1}};} 
+/ u:"kat" {return {value: 1, units: {"kat": 1}};} 
+/ u:"att" {return {value: 1, units: {"att": 1}};} 
+/ u:"osm" {return {value: 1, units: {"osm": 1}};} 
+/ u:"tex" {return {value: 1, units: {"tex": 1}};} 
+/ u:"cal" {return {value: 1, units: {"cal": 1}};} 
+/ u:"REM" {return {value: 1, units: {"REM": 1}};} 
+/ u:"RAD" {return {value: 1, units: {"RAD": 1}};} 
+/ u:"a_g" {return {value: 1, units: {"a_g": 1}};} 
+/ u:"Lmb" {return {value: 1, units: {"Lmb": 1}};} 
+/ u:"atm" {return {value: 1, units: {"atm": 1}};} 
+/ u:"erg" {return {value: 1, units: {"erg": 1}};} 
+/ u:"dyn" {return {value: 1, units: {"dyn": 1}};} 
+/ u:"Gal" {return {value: 1, units: {"Gal": 1}};} 
+/ u:"10^" {return {value: 1, units: {"10^": 1}};} 
+/ u:"10*" {return {value: 1, units: {"10*": 1}};} 
+/ u:"[S]" {return {value: 1, units: {"[S]": 1}};} 
+/ u:"[g]" {return {value: 1, units: {"[g]": 1}};} 
+/ u:"[G]" {return {value: 1, units: {"[G]": 1}};} 
+/ u:"[e]" {return {value: 1, units: {"[e]": 1}};} 
+/ u:"[k]" {return {value: 1, units: {"[k]": 1}};} 
+/ u:"[h]" {return {value: 1, units: {"[h]": 1}};} 
+/ u:"[c]" {return {value: 1, units: {"[c]": 1}};} 
+/ u:"bar" {return {value: 1, units: {"bar": 1}};} 
+/ u:"lm" {return {value: 1, units: {"lm": 1}};} 
+/ u:"Ci" {return {value: 1, units: {"Ci": 1}};} 
+/ u:"ph" {return {value: 1, units: {"ph": 1}};} 
+/ u:"cd" {return {value: 1, units: {"cd": 1}};} 
+/ u:"Ao" {return {value: 1, units: {"Ao": 1}};} 
+/ u:"Wb" {return {value: 1, units: {"Wb": 1}};} 
+/ u:"Gb" {return {value: 1, units: {"Gb": 1}};} 
+/ u:"Oe" {return {value: 1, units: {"Oe": 1}};} 
+/ u:"lx" {return {value: 1, units: {"lx": 1}};} 
+/ u:"Mx" {return {value: 1, units: {"Mx": 1}};} 
+/ u:"St" {return {value: 1, units: {"St": 1}};} 
+/ u:"Bi" {return {value: 1, units: {"Bi": 1}};} 
+/ u:"Bq" {return {value: 1, units: {"Bq": 1}};} 
+/ u:"Np" {return {value: 1, units: {"Np": 1}};} 
+/ u:"AU" {return {value: 1, units: {"AU": 1}};} 
+/ u:"mo" {return {value: 1, units: {"mo": 1}};} 
+/ u:"Ky" {return {value: 1, units: {"Ky": 1}};} 
+/ u:"gf" {return {value: 1, units: {"gf": 1}};} 
+/ u:"wk" {return {value: 1, units: {"wk": 1}};} 
+/ u:"Pa" {return {value: 1, units: {"Pa": 1}};} 
+/ u:"g%" {return {value: 1, units: {"g%": 1}};} 
+/ u:"sr" {return {value: 1, units: {"sr": 1}};} 
+/ u:"Bd" {return {value: 1, units: {"Bd": 1}};} 
+/ u:"eq" {return {value: 1, units: {"eq": 1}};} 
+/ u:"By" {return {value: 1, units: {"By": 1}};} 
+/ u:"Hz" {return {value: 1, units: {"Hz": 1}};} 
+/ u:"''" {return {value: 1, units: {"''": 1}};} 
+/ u:"pc" {return {value: 1, units: {"pc": 1}};} 
+/ u:"eV" {return {value: 1, units: {"eV": 1}};} 
+/ u:"Gy" {return {value: 1, units: {"Gy": 1}};} 
+/ u:"st" {return {value: 1, units: {"st": 1}};} 
+/ u:"Sv" {return {value: 1, units: {"Sv": 1}};} 
+/ u:"ar" {return {value: 1, units: {"ar": 1}};} 
+/ u:"sb" {return {value: 1, units: {"sb": 1}};} 
+/ u:"L" {return {value: 1, units: {"L": 1}};} 
+/ u:"t" {return {value: 1, units: {"t": 1}};} 
+/ u:"u" {return {value: 1, units: {"u": 1}};} 
+/ u:"P" {return {value: 1, units: {"P": 1}};} 
+/ u:"G" {return {value: 1, units: {"G": 1}};} 
+/ u:"R" {return {value: 1, units: {"R": 1}};} 
+/ u:"H" {return {value: 1, units: {"H": 1}};} 
+/ u:"T" {return {value: 1, units: {"T": 1}};} 
+/ u:"U" {return {value: 1, units: {"U": 1}};} 
+/ u:"B" {return {value: 1, units: {"B": 1}};} 
+/ u:"S" {return {value: 1, units: {"S": 1}};} 
+/ u:"m" {return {value: 1, units: {"m": 1}};} 
+/ u:"s" {return {value: 1, units: {"s": 1}};} 
+/ u:"F" {return {value: 1, units: {"F": 1}};} 
+/ u:"l" {return {value: 1, units: {"l": 1}};} 
+/ u:"V" {return {value: 1, units: {"V": 1}};} 
+/ u:"A" {return {value: 1, units: {"A": 1}};} 
+/ u:"W" {return {value: 1, units: {"W": 1}};} 
+/ u:"K" {return {value: 1, units: {"K": 1}};} 
+/ u:"C" {return {value: 1, units: {"C": 1}};} 
+/ u:"b" {return {value: 1, units: {"b": 1}};} 
+/ u:"%" {return {value: 1, units: {"%": 1}};} 
+/ u:"J" {return {value: 1, units: {"J": 1}};} 
+/ u:"'" {return {value: 1, units: {"'": 1}};} 
+/ u:"h" {return {value: 1, units: {"h": 1}};} 
+/ u:"d" {return {value: 1, units: {"d": 1}};} 
+/ u:"N" {return {value: 1, units: {"N": 1}};} 
+/ u:"a" {return {value: 1, units: {"a": 1}};} 
+/ u:"g" {return {value: 1, units: {"g": 1}};}
 PREFIX = "Y" 
 / "Z" 
 / "E" 

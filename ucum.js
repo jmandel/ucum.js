@@ -19,6 +19,8 @@ function parse(value, units){
     units = '1'+units;
   }
 
+  if (units === '') units = '1';
+
   var ret = parser.parse(units);
   ret.value *= value;
   return ret;
