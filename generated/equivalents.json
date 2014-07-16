@@ -84,6 +84,7 @@
     "ucum": "V.s"
   },
   "Cel": {
+    "value": null,
     "ucum": "cel(1 K)"
   },
   "T": {
@@ -199,7 +200,7 @@
     "ucum": "Pa"
   },
   "u": {
-    "value": 1.6605402000000002e-24,
+    "value": 1.6605402e-24,
     "ucum": "g"
   },
   "eV": {
@@ -227,7 +228,7 @@
     "ucum": "J/K"
   },
   "[eps_0]": {
-    "value": 8.854187816999999e-12,
+    "value": 8.854187817e-12,
     "ucum": "F/m"
   },
   "[mu_0]": {
@@ -243,7 +244,7 @@
     "ucum": "g"
   },
   "[m_p]": {
-    "value": 1.6726231000000002e-24,
+    "value": 1.6726231e-24,
     "ucum": "g"
   },
   "[G]": {
@@ -251,7 +252,7 @@
     "ucum": "m3.kg-1.s-2"
   },
   "[g]": {
-    "value": 9.806650000000001,
+    "value": 9.80665,
     "ucum": "m/s2"
   },
   "atm": {
@@ -331,7 +332,7 @@
     "ucum": "Bq"
   },
   "R": {
-    "value": 0.00025800000000000004,
+    "value": 0.000258,
     "ucum": "C/kg"
   },
   "RAD": {
@@ -759,6 +760,7 @@
     "ucum": "[didot]"
   },
   "[degF]": {
+    "value": null,
     "ucum": "degf(5 K/9)"
   },
   "[degR]": {
@@ -834,7 +836,7 @@
     "ucum": "g/9/km"
   },
   "m[H2O]": {
-    "value": 9.806650000000001,
+    "value": 9.80665,
     "ucum": "kPa"
   },
   "m[Hg]": {
@@ -862,9 +864,11 @@
     "ucum": "/m"
   },
   "[p'diop]": {
+    "value": null,
     "ucum": "100tan(1 rad)"
   },
   "%[slope]": {
+    "value": null,
     "ucum": "100tan(1 rad)"
   },
   "[mesh_i]": {
@@ -888,15 +892,19 @@
     "ucum": "mL/min/kg"
   },
   "[hp'_X]": {
+    "value": null,
     "ucum": "hpX(1 1)"
   },
   "[hp'_C]": {
+    "value": null,
     "ucum": "hpC(1 1)"
   },
   "[hp'_M]": {
+    "value": null,
     "ucum": "hpM(1 1)"
   },
   "[hp'_Q]": {
+    "value": null,
     "ucum": "hpQ(1 1)"
   },
   "[hp_X]": {
@@ -940,6 +948,7 @@
     "ucum": "mol"
   },
   "[pH]": {
+    "value": null,
     "ucum": "pH(1 mol/l)"
   },
   "g%": {
@@ -1095,30 +1104,39 @@
     "ucum": "1"
   },
   "Np": {
+    "value": null,
     "ucum": "ln(1 1)"
   },
   "B": {
+    "value": null,
     "ucum": "lg(1 1)"
   },
   "B[SPL]": {
+    "value": null,
     "ucum": "2lg(2 10*-5.Pa)"
   },
   "B[V]": {
+    "value": null,
     "ucum": "2lg(1 V)"
   },
   "B[mV]": {
+    "value": null,
     "ucum": "2lg(1 mV)"
   },
   "B[uV]": {
+    "value": null,
     "ucum": "2lg(1 uV)"
   },
   "B[10.nV]": {
+    "value": null,
     "ucum": "2lg(10 nV)"
   },
   "B[W]": {
+    "value": null,
     "ucum": "lg(1 W)"
   },
   "B[kW]": {
+    "value": null,
     "ucum": "lg(1 kW)"
   },
   "st": {
@@ -1166,6 +1184,7 @@
     "ucum": "[in_i]"
   },
   "bit_s": {
+    "value": null,
     "ucum": "ld(1 1)"
   },
   "bit": {

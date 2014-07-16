@@ -85,6 +85,7 @@ module.exports={
     "ucum": "V.s"
   },
   "Cel": {
+    "value": null,
     "ucum": "cel(1 K)"
   },
   "T": {
@@ -200,7 +201,7 @@ module.exports={
     "ucum": "Pa"
   },
   "u": {
-    "value": 1.6605402000000002e-24,
+    "value": 1.6605402e-24,
     "ucum": "g"
   },
   "eV": {
@@ -228,7 +229,7 @@ module.exports={
     "ucum": "J/K"
   },
   "[eps_0]": {
-    "value": 8.854187816999999e-12,
+    "value": 8.854187817e-12,
     "ucum": "F/m"
   },
   "[mu_0]": {
@@ -244,7 +245,7 @@ module.exports={
     "ucum": "g"
   },
   "[m_p]": {
-    "value": 1.6726231000000002e-24,
+    "value": 1.6726231e-24,
     "ucum": "g"
   },
   "[G]": {
@@ -252,7 +253,7 @@ module.exports={
     "ucum": "m3.kg-1.s-2"
   },
   "[g]": {
-    "value": 9.806650000000001,
+    "value": 9.80665,
     "ucum": "m/s2"
   },
   "atm": {
@@ -332,7 +333,7 @@ module.exports={
     "ucum": "Bq"
   },
   "R": {
-    "value": 0.00025800000000000004,
+    "value": 0.000258,
     "ucum": "C/kg"
   },
   "RAD": {
@@ -760,6 +761,7 @@ module.exports={
     "ucum": "[didot]"
   },
   "[degF]": {
+    "value": null,
     "ucum": "degf(5 K/9)"
   },
   "[degR]": {
@@ -835,7 +837,7 @@ module.exports={
     "ucum": "g/9/km"
   },
   "m[H2O]": {
-    "value": 9.806650000000001,
+    "value": 9.80665,
     "ucum": "kPa"
   },
   "m[Hg]": {
@@ -863,9 +865,11 @@ module.exports={
     "ucum": "/m"
   },
   "[p'diop]": {
+    "value": null,
     "ucum": "100tan(1 rad)"
   },
   "%[slope]": {
+    "value": null,
     "ucum": "100tan(1 rad)"
   },
   "[mesh_i]": {
@@ -889,15 +893,19 @@ module.exports={
     "ucum": "mL/min/kg"
   },
   "[hp'_X]": {
+    "value": null,
     "ucum": "hpX(1 1)"
   },
   "[hp'_C]": {
+    "value": null,
     "ucum": "hpC(1 1)"
   },
   "[hp'_M]": {
+    "value": null,
     "ucum": "hpM(1 1)"
   },
   "[hp'_Q]": {
+    "value": null,
     "ucum": "hpQ(1 1)"
   },
   "[hp_X]": {
@@ -941,6 +949,7 @@ module.exports={
     "ucum": "mol"
   },
   "[pH]": {
+    "value": null,
     "ucum": "pH(1 mol/l)"
   },
   "g%": {
@@ -1096,30 +1105,39 @@ module.exports={
     "ucum": "1"
   },
   "Np": {
+    "value": null,
     "ucum": "ln(1 1)"
   },
   "B": {
+    "value": null,
     "ucum": "lg(1 1)"
   },
   "B[SPL]": {
+    "value": null,
     "ucum": "2lg(2 10*-5.Pa)"
   },
   "B[V]": {
+    "value": null,
     "ucum": "2lg(1 V)"
   },
   "B[mV]": {
+    "value": null,
     "ucum": "2lg(1 mV)"
   },
   "B[uV]": {
+    "value": null,
     "ucum": "2lg(1 uV)"
   },
   "B[10.nV]": {
+    "value": null,
     "ucum": "2lg(10 nV)"
   },
   "B[W]": {
+    "value": null,
     "ucum": "lg(1 W)"
   },
   "B[kW]": {
+    "value": null,
     "ucum": "lg(1 kW)"
   },
   "st": {
@@ -1167,6 +1185,7 @@ module.exports={
     "ucum": "[in_i]"
   },
   "bit_s": {
+    "value": null,
     "ucum": "ld(1 1)"
   },
   "bit": {
@@ -1207,7 +1226,7 @@ module.exports={
   "f": 1e-15,
   "a": 1e-18,
   "z": 1e-21,
-  "y": 1.0000000000000001e-24,
+  "y": 1e-24,
   "Ki": 1024,
   "Mi": 1048576,
   "Gi": 1073741824,
@@ -2735,14 +2754,6 @@ global.ucum = require('../ucum.js');
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"../ucum.js":7}],6:[function(require,module,exports){
 module.exports = {
-
-  enotation: function enontation(v){
-    if (!v) return;
-    v = v.match(/([\d\.]+)(?:e(-?\d+))?/);
-    var num = parseFloat(v[1]);
-    if (v[2]) num *= Math.pow(10,parseInt(v[2]));
-    return num;
-  },
 
   multiply: function multiply(t, ms) {
     if (ms.length == 0) return t;
