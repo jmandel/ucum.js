@@ -33,6 +33,12 @@ console.log(canonical);
 
 Save and include a `<script>` tag for [dist/ucum.js](dist/ucum.js)
 
+### To use in Node.js
+
+```
+npm install ucum.js
+```
+
 ### To build
 
 ```
