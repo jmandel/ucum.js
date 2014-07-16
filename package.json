@@ -1,22 +1,24 @@
 {
   "name": "ucum.js",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "JavaScript implementation of unitsofmeasure.org (UCUM)",
   "main": "ucum.js",
-  "dependencies": {
-    "optimist": "~0.6.1",
-    "peg": "~0.0.0",
-    "pegjs": "~0.8.0",
-    "xml2js": "~0.4.4",
-    "browserify": "*"
-  },
+  "dependencies": { },
   "devDependencies": {
     "mocha": "*",
-    "should": "*"
+    "should": "*",
+    "browserify": "*",
+    "optimist": "~0.6.1",
+    "xml2js": "~0.4.4",
+    "pegjs": "~0.8.0"
   },
   "scripts": {
     "test": "mocha -c -R spec"
   },
   "author": "Josh Mandel",
-  "license": "Apache 2"
+  "license": "Apache 2",
+  "repository" : {
+    "type" : "git",
+    "url" : "http://github.com/jmandel/ucum.js.git"
+  }
 }
