@@ -30,10 +30,14 @@ describe('Ucum functional tests', function(){
 
   tests.validation.forEach(function(t){
     it('Handles case ' + t.id + ': ' + t.unit + '==' + t.valid, function(){
+      var parsed = false;
       try {
-        var r = ucum.parse(t.unit);  
+        ucum.parse(t.unit);  
+        parsed = true;
+      } catch(e){ } 
+      if (parsed) {
         assert(t.valid === 'true');
-      } catch(e){
+      } else {
         assert(t.valid === 'false');
       }
     });

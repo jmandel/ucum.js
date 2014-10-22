@@ -20,18 +20,9 @@ expr =  t:term ms:(multiply)* {
   return multiply(t, ms);
 }
 
-term = e:element exp:(exponent)? (ANN)* {
+term = e:element exp:(exponent)? (ANN)* !{return e.ann && exp;} {
   return topower(e, exp);
-}
-element  =  a:ANN? u:simpleUnit {return u;} /  "(" e:expr ")" {return e;} / ANN
-
-exponent =  s:([+-])? d:DIGITS {return (s=="-") ? (-1*d) : d}
-
-simpleUnit =  p:PREFIX? a:METRICATOM !{return(p && !ismetric(a));} {
-  var ret = a;
-  if (p) ret.value = ret.value * prefixes[p];
-  return ret;
-} / METRICATOM / d:DIGITS {
+} / d:DIGITS  (ANN)*{
  var ret = {
     value: d,
     units: {}
@@ -39,12 +30,21 @@ simpleUnit =  p:PREFIX? a:METRICATOM !{return(p && !ismetric(a));} {
   return ret;
 }
 
+element  =   u:simpleUnit {return u;} /  "(" e:expr ")" {return e;} / ANN
 
-DIGITS = v:[0-9]+ 'e'? e:exponent?  {
+exponent =  s:([+-])? d:DIGITS {return (s=="-") ? (-1*d) : d}
+
+simpleUnit =  p:PREFIX? a:METRICATOM !{return(p && !ismetric(a));} {
+  var ret = a;
+  if (p) ret.value = ret.value * prefixes[p];
+  return ret;
+} / METRICATOM 
+
+DIGITS = v:[0-9]+ epresent:'e'? e:exponent? !{return (!epresent && !!e);}  {
   return parseInt(v.join(""))*Math.pow(10, e||0);
 } 
 
-ANN = "{" m:[^}]+ "}" { return {value: 1, units:{}} }
+ANN = "{" m:[^}]+ "}" !{return /[^\x00-\x7F]/.test(m);} { return {value: 1, units:{}, ann: m} }
 
 METRICATOM = {{METRICATOM}}
 PREFIX = {{PREFIX}}
