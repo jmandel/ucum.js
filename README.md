@@ -3,6 +3,8 @@ JavaScript implementation of UCUM (http://unitsofmeasure.org)
 
 ## Units conversion
 
+`ucum.convert`: Convert from one UCUM unit (represented as a string) to another, assuming they are conformant.
+
 ```
 var one_inch = ucum.convert(2.54, 'cm', '[in_i]');
 console.log(one_inch)
@@ -12,6 +14,9 @@ console.log(one_inch)
 
 ## Units parsing
 
+`ucum.parse`: Parse a string into a ucum.js JSON representation (an object with `value`, `units`)
+
+
 ```
 var parsed = ucum.parse('km/h');
 console.log(parsed);
@@ -20,6 +25,8 @@ console.log(parsed);
 ```
 
 ## Units canonicalization
+
+`ucum.canonicalize`: Parse a string into a ucum.js JSON representation (an object with `value`, `units`), and convert this to an expression where all `units` propeties are reduced to the following base units: meter, second, gram, radian, kelvin, coulomb, candela.
 
 ```
 var canonical = ucum.canonicalize('[in_i]/a');
