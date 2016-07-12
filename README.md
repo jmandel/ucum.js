@@ -14,7 +14,7 @@ console.log(one_inch)
 
 ## Units parsing
 
-`ucum.parse`: Parse a string into a ucum.js JSON representation (an object with `value` as a Number, and `units` as an Object where keys are acse-sensitive UCUM unit names and values are integers representing an exponent).
+`ucum.parse`: Parse a string into a ucum.js JSON representation (an object with `value` as a Number, and `units` as an Object where keys are case-sensitive UCUM unit names and values are integers representing an exponent).
 
 
 ```
