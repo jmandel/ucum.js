@@ -3,7 +3,7 @@ JavaScript implementation of UCUM (http://unitsofmeasure.org)
 
 ## Units conversion
 
-`ucum.convert`: Convert a value (represented as a Javascript Number) from one UCUM unit (represented as a string) to another, assuming they are conformant.
+`ucum.convert`: Convert a value (represented as a Javascript Number) from one UCUM unit (represented as a case-sensitive UCUM string) to another, assuming they are conformant.
 
 ```
 var one_inch = ucum.convert(2.54, 'cm', '[in_i]');
@@ -14,7 +14,7 @@ console.log(one_inch)
 
 ## Units parsing
 
-`ucum.parse`: Parse a string into a ucum.js JSON representation (an object with `value` as a Number, and `units` as an Object where keys are UCUM unit names and values are integers representing an exponent).
+`ucum.parse`: Parse a string into a ucum.js JSON representation (an object with `value` as a Number, and `units` as an Object where keys are acse-sensitive UCUM unit names and values are integers representing an exponent).
 
 
 ```
@@ -26,7 +26,7 @@ console.log(parsed);
 
 ## Units canonicalization
 
-`ucum.canonicalize`: Parse a string into a ucum.js JSON representation (an object with `value` as a Number, and `units` as an Object where keys are UCUM unit names and values are integers representing an exponent), and convert this to an expression where all `units` properties are reduced to the following base units: meter, second, gram, radian, kelvin, coulomb, candela.
+`ucum.canonicalize`: Parse a string into a ucum.js JSON representation (an object with `value` as a Number, and `units` as an Object where keys are case-sensitive UCUM unit names and values are integers representing an exponent), and convert this to an expression where all `units` properties are reduced to the following base units: meter, second, gram, radian, kelvin, coulomb, candela.
 
 ```
 var canonical = ucum.canonicalize('[in_i]/a');
